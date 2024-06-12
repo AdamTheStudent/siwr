@@ -5,45 +5,34 @@
 
 Ten projekt został wykonany w ramach kursu Sztuczna Inteligencja w Robotyce (SIWR). Głównym celem było stworzenie systemu estymacji stanu dla robota dwukołowego z wykorzystaniem probabilistycznych modeli grafowych. System miał za zadanie lokalizować robota w znanej mapie na podstawie danych z wielu czujników.
 
-## Wymagania Projektu
-
-- Projekt musi być wykonany samodzielnie.
-- Praca będzie sprawdzana pod kątem plagiatu, a wykrycie plagiatu skutkuje oceną niedostateczną bez możliwości poprawy.
-- Praca musi być oddana poprzez prywatne repozytorium na GitHubie. Proszę utworzyć prywatne repozytorium, nadać prowadzącemu dostęp (login na GitHubie: jpiasek) i przesłać link do repozytorium przez zadanie na stronie kursu.
-- Raport opisujący algorytmy należy umieścić w pliku README.md.
-- Raport powinien zawierać opis koncepcji i zasady działania projektu, natomiast objaśnienia kodu powinny znajdować się jako komentarze w kodzie.
-
-## Opis
-
 Projekt polega na stworzeniu systemu estymacji stanu robota z wykorzystaniem probabilistycznych modeli grafowych. System ma za zadanie lokalizować robota dwukołowego w znanej mapie na podstawie informacji z wielu czujników.
 
 Dane wejściowe mogą pochodzić z symulacji (np. ROS GAZEBO) lub z gotowego pliku ROSBAG.
-
-Projekt będzie oceniany na podstawie następujących elementów:
-- Liczba wykorzystanych systemów pomiarowych (należy użyć min. 3 czujników, np. odometria, IMU, GPS itp.);
-- Dokładność działania algorytmu;
-- Tryb działania (wyżej oceniane będą projekty, w których publikowana jest wiadomość z estymowaną pozycją, niż takie, w których estymacja następuje offline);
-- Czytelność kodu i sprawozdania.
 
 ## Szczegóły Implementacji
 
 ### Wykorzystane Czujniki
 - **LIDAR**: Używany do mapowania i wykrywania przeszkód.
-- **Kamery Głębi**: Używane do wykrywania głębokości i przeszkód w środowisku.
 - **Odometria i IMU**: Używane do śledzenia pozycji i ruchu robota.
 
 ### Implementacja Świata
-Robot działa w świecie przypominającym labirynt. Środowisko jest zaprojektowane tak, aby stanowić wyzwanie dla nawigacji robota i jego systemu estymacji stanu.
+Robot działa w świecie przypominającym labirynt. Środowisko jest zaprojektowane tak, aby stanowić wyzwanie dla nawigacji robota i jego systemu estymacji stanu. Labirynt zawiera różnorodne przeszkody i ścieżki, które robot musi rozpoznać i unikać, co wymaga zaawansowanej analizy danych z czujników. Docelowo robot ma za zadanie odnaleźć swoją drogę przez labirynt, wykorzystując estymację stanu i lokalizację opartą na danych z LIDARu oraz IMU.
 
 ### Algorytm
 Projekt próbował stworzyć algorytm do odczytu danych z czujników odometrii i IMU.
+
+Algorytm składał się z kilku kluczowych kroków:
+1. Subskrybowanie tematów ROS dotyczących odometrii i IMU.
+2. Przetwarzanie danych z tych czujników w celu oszacowania pozycji i orientacji robota.
+3. Implementacja filtrów i algorytmów do estymacji stanu robota na podstawie odczytów z czujników.
+4. Integracja danych z odometrii i IMU w celu poprawy dokładności lokalizacji.
 
 #### TODO
 - Implementacja algorytmu subskrybowania tematów i reagowania na wartości z czujników.
 
 > Podjęto wiele prób zaimplementowania tego algorytmu, ale niestety każda zakończyła się niepowodzeniem. Wielodniowe prace nad projektem nie przyniosły finalnie oczekiwanych rezultatów, ale mimo tego nauczyły nas wielu przydatnych umiejętności, takich jak stosowanie sieci Bayesowskich, używanie grafów czynników, warunkowych pól losowych oraz wykorzystania procesów decyzyjnych Markova.
 
-### Przydatne Zasoby
+### Literatura
 - [Wprowadzenie do Robotyki](https://www.roboticsbook.org/intro.html)
 - [Tutoriale GTSAM](https://gtsam.org/tutorials/intro.html)
 - [Graph MSF](https://github.com/leggedrobotics/graph_msf)
