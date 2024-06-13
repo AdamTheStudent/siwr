@@ -1,4 +1,3 @@
-
 # Projekt SIWR (2024)
 
 ## Opis Projektu
@@ -19,18 +18,20 @@ Dane wejściowe mogą pochodzić z symulacji (np. ROS GAZEBO) lub z gotowego pli
 Robot działa w świecie przypominającym labirynt. Środowisko jest zaprojektowane tak, aby stanowić wyzwanie dla nawigacji robota i jego systemu estymacji stanu. Labirynt zawiera różnorodne przeszkody i ścieżki, które robot musi rozpoznać i unikać, co wymaga zaawansowanej analizy danych z czujników. Docelowo robot ma za zadanie odnaleźć swoją drogę przez labirynt, wykorzystując estymację stanu i lokalizację opartą na danych z LIDARu oraz IMU.
 
 ### Algorytm
-Projekt próbował stworzyć algorytm do odczytu danych z czujników odometrii i IMU.
+Stworzono algorytm do odczytu danych z czujników odometrii i IMU.
 
-Algorytm składał się z kilku kluczowych kroków:
+Algorytm składa się z kilku kluczowych kroków:
 1. Subskrybowanie tematów ROS dotyczących odometrii i IMU.
 2. Przetwarzanie danych z tych czujników w celu oszacowania pozycji i orientacji robota.
 3. Implementacja filtrów i algorytmów do estymacji stanu robota na podstawie odczytów z czujników.
 4. Integracja danych z odometrii i IMU w celu poprawy dokładności lokalizacji.
 
-#### TODO
-- Implementacja algorytmu subskrybowania tematów i reagowania na wartości z czujników.
-
-> Podjęto wiele prób zaimplementowania tego algorytmu, ale niestety każda zakończyła się niepowodzeniem. Wielodniowe prace nad projektem nie przyniosły finalnie oczekiwanych rezultatów, ale mimo tego nauczyły nas wielu przydatnych umiejętności, takich jak stosowanie sieci Bayesowskich, używanie grafów czynników, warunkowych pól losowych oraz wykorzystania procesów decyzyjnych Markova.
+### Implementacja
+W projekcie zostały użyte czujniki IMU i Odom. Został zaimplementowany labirynt i uruchomiony robot, który odczytuje wartości z czujników. Robot próbuje się odnaleźć w labiryncie i wydostać się z niego. W celu realizacji projektu:
+- Stworzono symulację w środowisku ROS2 oraz Gazebo.
+- Zaimplementowano algorytmy fuzji danych z czujników IMU i odometrii.
+- Wykorzystano algorytmy SLAM (Simultaneous Localization and Mapping) do jednoczesnego mapowania i lokalizowania robota w labiryncie.
+- Przeprowadzono wielokrotne testy i kalibrację czujników w celu uzyskania jak najlepszej dokładności estymacji pozycji robota.
 
 ### Literatura
 - [Wprowadzenie do Robotyki](https://www.roboticsbook.org/intro.html)
@@ -39,4 +40,9 @@ Algorytm składał się z kilku kluczowych kroków:
 - [Lokalizacja Robota przy użyciu Skanera Laserowego i Optymalizacji Grafu Pozycji](https://medium.com/@k3083518729/robot-localization-using-laser-scanner-and-pose-graph-optimization-fc40605bf5bc)
 
 ## Podsumowanie
-Pomimo wyzwań i braku pełnej implementacji zamierzonego algorytmu, projekt dostarczył znaczących możliwości nauki w dziedzinie robotyki i AI. Doświadczenie zdobyte w trakcie pracy będzie wartościowe dla przyszłych projektów i zastosowań w tej dziedzinie.
+Robot wyszukuje odpowiedniej drogi w labiryncie i na podstawie odczytu z czujników próbuje się z niego wydostać. Projekt dostarczył znaczących możliwości nauki w dziedzinie robotyki i AI. Doświadczenie zdobyte w trakcie pracy obejmuje:
+- Korzystanie z różnych typów czujników i integracja ich danych.
+- Implementację zaawansowanych algorytmów AI do sterowania robotem.
+- Praktyczne zastosowanie teorii probabilistycznych modeli grafowych w robotyce.
+- Rozwój umiejętności w zakresie symulacji robotów i środowisk w ROS2 i Gazebo.
+- Analizę i optymalizację algorytmów w celu poprawy dokładności i efektywności działania systemów robotycznych.
